@@ -1,46 +1,16 @@
+// Node 모듈 호출
 var request = require("request");
 
+
+// const var 선언
 var API_KEY = "5954674b51736b793131394b43574959";
 var URL = 'http://openapi.seoul.go.kr:8088/' + API_KEY + '/json/ListRiverStageService/1/35/';
-/*
-var requestData = function(data, type){
 
-    switch(type){
-        case 1 :
-            type = ':9402/river';
-            break;
-        case 2 :
-            type = ':9401/stream';
-            break;
-        case 3 :
-            type = ':9400/observatory';
-            break;
-        default :
-            return false;
-    };
-
-    var options = {
-        method: 'POST',
-        url: 'http://shkim.dev.wizeye.io' + type,
-        headers: {
-            'cache-control': 'no-cache',
-            'content-type': 'application/json'
-        },
-        body: data,
-        json: true
-    };
-
-    request(options, function(error, response, body) {
-        if (error) throw new Error(error);
-        console.log(body);
-    });
-}
-*/
+// Wizeye로 request
 var requestData = function(data) {
-
     var options = {
         method: 'POST',
-        url: 'http://shkim.dev.wizeye.io:9070//alfeios',
+        url: 'http://shkim.dev.wizeye.io:9070/alfeios',
         headers: {
             'cache-control': 'no-cache',
             'content-type': 'application/json'
@@ -199,6 +169,65 @@ var getLevel = function(riverName) {
     }
 }
 
+var getUpstream = function(riverName){
+    switch (riverName) {
+        case "한강":
+            return null;
+
+        case "고덕천":
+        case "성내천":
+        case "탄천":
+        case "중랑천":
+        case "반포천":
+        case "봉원천":
+        case "홍제천":
+        case "안양천":
+            return "hangang";
+
+        case "망월천":
+            return "godeokcheon";
+
+        case "세곡천":
+        case "양재천":
+        case "여의천":
+            return "tancheon";
+
+        case "도봉천":
+        case "방학천":
+        case "당현천":
+        case "묵동천":
+        case "우이천":
+        case "대동천":
+        case "가오천":
+        case "화계천":
+        case "면목천":
+        case "청계천":
+        case "성북천":
+        case "정릉천":
+        case "월곡천":
+        case "전농천":
+            return "joonglangcheon";
+
+        case "사당천":
+            return "banpocheon";
+
+        case "불광천":
+        case "녹번천":
+            return "hongjecheon";
+
+        case "시흥천":
+        case "목감천":
+        case "오류천":
+        case "도림천":
+        case "봉천천":
+        case "대방천":
+            return "anyangcheon";
+
+        default:
+            return null;
+    }
+}
+
 var getRiverInfo = function(url) {
 
     request({ "url": url, "Content-type": "application/json" }, function(error, response, body) {
@@ -208,7 +237,7 @@ var getRiverInfo = function(url) {
 
         var riverInfo = data.ListRiverStageService.row,
             riverCount = data.ListRiverStageService.list_total_count,
-            riverName, i,
+            riverName, upStream,
             observatoryInfoObject = null,
             streamInfoObject = null,
             riverInfoObject = null,
@@ -227,39 +256,14 @@ var getRiverInfo = function(url) {
                 riverName: convertRiverNameKorToEng(riverName),
                 riverGaugeName: convertGaugeNameKorToEng(riverGaugeName),
                 curRiverGauge: Number(curRiverGauge),
-                maxRiverGauge: Number(maxRiverGauge)
+                maxRiverGauge: Number(maxRiverGauge),
+                upStream: getUpstream(riverName)
             };
 
             observatoryInfoObject.level = getLevel(riverName);
-
             observatoryArray.push(observatoryInfoObject);
-
-            /*
-                        if(observatoryInfoObject.level == 1)
-                            riverArray.push(observatoryInfoObject);
-                        else if(observatoryInfoObject.level == 2)
-                            streamArray.push(observatoryInfoObject);
-                        else
-                            observatoryArray.push(observatoryInfoObject);
-            */
-            //console.log(riverGaugeName + '[' + riverName + ']' + '\n');
         }
-
-        //console.log(observatoryArray);
-        //typenumber 1 = river, 2 = stream, 3 = observatory
-        /*
-        console.log('############## level 1 ################');
-        console.log(riverArray);
-        console.log('############## level 2 ################');
-        console.log(streamArray);
-        console.log('############## level 3 ################');
-        console.log(observatoryArray);
-        */
-
-        //requestData(riverArray, 1);
-        //requestData(streamArray, 2);
-        //requestData(observatoryArray, 3);
-        requestdData(observatoryArray);
+        requestData(observatoryArray);
     });
 };
 
