@@ -40,13 +40,6 @@
         "upStream": "hangang",
         "level": 2
     },
-    "초안교": {
-        "riverName": "danghyeoncheon",
-        "riverGaugeName": "choangyo",
-        "maxRiverGauge": 6.68,
-        "upStream": "joonglangcheon",
-        "level": 3
-    },
     "대곡교": {
         "riverName": "tancheon",
         "riverGaugeName": "daegokgyo",
@@ -218,15 +211,20 @@
         "riverName": "hangang",
         "riverGaugeName": "cheonhodaegyo",
         "maxRiverGauge": 19,
-        "upStream": null,
         "level": 1
     },
     "청담대교": {
         "riverName": "hangang",
         "riverGaugeName": "chungdamdaegyo",
         "maxRiverGauge": 16.12,
-        "upStream": null,
         "level": 1
+    },
+    "초안교": {
+        "riverName": "danghyeoncheon",
+        "riverGaugeName": "choangyo",
+        "maxRiverGauge": 6.68,
+        "upStream": "joonglangcheon",
+        "level": 3
     },
     "탄천2교": {
         "riverName": "tancheon",
