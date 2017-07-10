@@ -235,6 +235,7 @@ var getRiverInfo = function(url) {
 
         data = JSON.parse(body);
 
+
         var riverInfo = data.ListRiverStageService.row,
             riverCount = data.ListRiverStageService.list_total_count,
             riverName, upStream,
@@ -263,7 +264,9 @@ var getRiverInfo = function(url) {
             observatoryInfoObject.level = getLevel(riverName);
             observatoryArray.push(observatoryInfoObject);
         }
+
         requestData(observatoryArray);
+
     });
 };
 
