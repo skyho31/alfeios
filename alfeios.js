@@ -1,13 +1,36 @@
-// Node 모듈 호출
+/**
+ * N3N Web 파트 OJT
+ *
+ * - OJT 주제 : wizeye를 사용해서 적절한 플랫폼 구축하기
+ * - 프로젝트 주제 : 서울시 하천 관제 시스템 만들기
+ * - 기간 : 2017.6.22 ~ 2017.7.16
+ * - 작성자 : 김선호 연구원
+ *
+ *
+ * 서울 열린데이터 광장에서 제공하는 서울시 하천 수위 현황 api를 통해 받은 하천 데이터를 wizeye에서 사용할 수 있도록
+ * 재가공하여, wizeye 서버로 1분마다 전송해주는 것이 목적입니다. api에서 오는 값이 한글 값으로 오기에, wizeye에 적절한 영문
+ * 형태로 바꿔주기 위하여, 로컬에 json 형태로 상수 데이터(관측소 이름, 하천 이름, 최대 수위, 상류 이름, 하천 계층 레벨)
+ * 를 저장해 놓았으며, 매 요청시 마다 프로퍼티값으로 관측소 이름을 검색하게 하여 실시간 수위를 병합하여 wizeye 서버로 전송하고
+ * 있습니다.
+ *
+ */
+
+
+// wizeye서버 전송을 위한 request 모듈 호출
 var request = require("request");
 
-
-// const var 선언
+// 서울 열린데이터 광장 api 관련 상수 선언
 var API_KEY = "5954674b51736b793131394b43574959";
 var URL = 'http://openapi.seoul.go.kr:8088/' + API_KEY + '/json/ListRiverStageService/1/35/';
 
-// Wizeye로 request
+// 로컬 json(상수 데이터) 파일 불러오기
+var riverInfoObj = require('./riverInfo.json');
+
+// Wizeye 서버로 request 하는 함수
+// getRiverInfo 함수 마지막에 넣음으로써 실행되게 배치
 var requestData = function(data) {
+
+    // request 모듈을 사용하기 위한 설정.
     var options = {
         method: 'POST',
         url: 'http://shkim.dev.wizeye.io:9070/alfeios',
@@ -19,257 +42,69 @@ var requestData = function(data) {
         json: true
     };
 
+    // request 모듈을 통한 wizeye 서버로 데이터 전송
+    // parameter로 options 값과 콜백함수를 받으며, 콜백함수의 error는 에러 시 메시지, response는 응답코드,
+    // body는 전송된 값을 의미합니다.
     request(options, function(error, response, body) {
         if (error) throw new Error(error);
-        console.log(body);
+
+        // 전송되는 데이터를 알고 싶을 때, 아래에 있는 console 주석 해제
+        // console.log(body);
+
+        // 데이터를 전송하는 타임라인을 알기 위한 콘솔
+        var date = new Date();
+        console.log(date);
     });
 }
 
-var convertGaugeNameKorToEng = function(gaugeName) {
-    switch (gaugeName) {
-        case '고덕펌프장':
-            return 'godeokpump';
-        case '초안교':
-            return 'choangyo';
-        case '묵동천':
-            return 'mukdongcheon';
-        case '삼천교':
-            return 'samcheongyo';
-        case '신림3교':
-            return 'sinlim3gyo';
-        case '사당천':
-            return 'sadangcheon';
-        case '영동2교':
-            return 'yeongdong2gyo';
-        case '반포펌프':
-            return 'banpopump';
-        case '고척교':
-            return 'gocheokgyo';
-        case '도림교':
-            return 'dolimgyo';
-        case '광화교':
-            return 'gwanghwagyo';
-        case '안양하구':
-            return 'anyanghagu';
-        case '용두교':
-            return 'yongdugyo';
-        case '모래말옆':
-            return 'moraemalyeob';
-        case '장월교옆':
-            return 'jangwolgyoyeob';
-        case '월계1교':
-            return 'wolgye1gyo';
-        case '성동교':
-            return 'seongdonggyo';
-        case '기아대교':
-            return 'giadaegyo';
-        case '대곡교':
-            return 'daegokgyo';
-        case '노원교':
-            return 'nowongyo';
-        case '계성교':
-            return 'gyeseonggyo';
-        case '신의교':
-            return 'sinuigyo';
-        case '마장2교':
-            return 'majang2gyo';
-        case '증산교':
-            return 'jeoungsangyo';
-        case '성산2교':
-            return 'sungsan2gyo';
-        case '신대방역':
-            return 'sindaebangyeok';
-        case '몽촌펌프':
-            return 'mongchonpump'
-        case '봉은교':
-            return 'bongeungyo';
-        case '탄천2교':
-            return 'tancheon2gyo';
-        case '천호대교':
-            return 'cheonhodaegyo';
-        case '여수대교':
-            return 'yeosudaegyo';
-        case '한강대교':
-            return 'hangangdaegyo'
-        case '잠수교':
-            return 'jamsugyo';
-        case '광장(광진교)':
-            return 'gwangjingyo';
-        case '청담대교':
-            return 'chungdamdaegyo';
-        default:
-            return gaugeName;
-    }
-}
-
-var convertRiverNameKorToEng = function(riverName) {
-    switch (riverName) {
-        case '고덕천':
-            return 'godeokcheon';
-        case '당현천':
-            return 'danghyeoncheon';
-        case '묵동천':
-            return 'mukdongcheon';
-        case '진관천':
-            return 'jingwancheon';
-        case '도림천':
-            return 'dolimcheon';
-        case '사당천':
-            return 'sadangcheon';
-        case '양재천':
-            return 'yangjaecheon';
-        case '반포천':
-            return 'banpocheon';
-        case '안양천':
-            return 'anyangcheon';
-        case '목감천':
-            return 'mokgamcheon';
-        case '정릉천':
-            return 'jungleungcheon';
-        case '방학천':
-            return 'banghakcheon';
-        case '우이천':
-            return 'uicheon';
-        case '중랑천':
-            return 'joonglangcheon';
-        case '탄천':
-            return 'tancheon';
-        case '청계천':
-            return 'chunggyecheon';
-        case '불광천':
-            return 'bulgwangcheon';
-        case '홍제천':
-            return 'hongjecheon';
-        case '성내천':
-            return 'seongnaecheon';
-        case '한강':
-            return 'hangang';
-        default:
-            return riverName;
-    }
-}
-
-var getLevel = function(riverName) {
-    switch (riverName) {
-        case "한강":
-            return 1;
-
-        case "고덕천":
-        case "성내천":
-        case "탄천":
-        case "중랑천":
-        case "반포천":
-        case "봉원천":
-        case "홍제천":
-        case "안양천":
-            return 2;
-
-        default:
-            return 3;
-    }
-}
-
-var getUpstream = function(riverName){
-    switch (riverName) {
-        case "한강":
-            return null;
-
-        case "고덕천":
-        case "성내천":
-        case "탄천":
-        case "중랑천":
-        case "반포천":
-        case "봉원천":
-        case "홍제천":
-        case "안양천":
-            return "hangang";
-
-        case "망월천":
-            return "godeokcheon";
-
-        case "세곡천":
-        case "양재천":
-        case "여의천":
-            return "tancheon";
-
-        case "도봉천":
-        case "방학천":
-        case "당현천":
-        case "묵동천":
-        case "우이천":
-        case "대동천":
-        case "가오천":
-        case "화계천":
-        case "면목천":
-        case "청계천":
-        case "성북천":
-        case "정릉천":
-        case "월곡천":
-        case "전농천":
-            return "joonglangcheon";
-
-        case "사당천":
-            return "banpocheon";
-
-        case "불광천":
-        case "녹번천":
-            return "hongjecheon";
-
-        case "시흥천":
-        case "목감천":
-        case "오류천":
-        case "도림천":
-        case "봉천천":
-        case "대방천":
-            return "anyangcheon";
-
-        default:
-            return null;
-    }
-}
-
+// 실시간으로 변동되는 현재 수위 데이터를 기존 상수 데이터와 통합하기 위한 함수
+// api에서 데이터를 가져오기 위해 요청할 url을 매개변수로 받으며 request 모듈을 사용합니다.
 var getRiverInfo = function(url) {
 
+    // API를 통한 하천 데이터 요청
     request({ "url": url, "Content-type": "application/json" }, function(error, response, body) {
+
         if (error) throw new Error(error);
 
+        // JSON string으로 온 데이터를 object 형태로 파싱합니다.
         data = JSON.parse(body);
 
-
+        // riverInfo : 전송받은 데이터(json 배열),
+        // riverCount : 리스트 개수
+        // observatoryInfoObject : 전송 받은 데이터에서 필요한 수위 현황만 추출하여 기존 상수 데이터와 통합하기
+        // 위한 임시 객체
+        // observatoryArray : wizeye 서버로 보낼 json object 배열
         var riverInfo = data.ListRiverStageService.row,
             riverCount = data.ListRiverStageService.list_total_count,
-            riverName, upStream,
             observatoryInfoObject = null,
-            streamInfoObject = null,
-            riverInfoObject = null,
-            observatoryArray = [],
-            streamArray = [],
-            riverArray = [];
+            observatoryArray = [];
 
+        // 전송 받은 데이터에서 필요한 수위 현황만 추출하여 기존 상수 데이터와 통합
         for (i = 0; i < riverCount; i++) {
+
+            // 관측소 이름 공백 제거
             riverGaugeName = riverInfo[i].RIVERGAUGE_NAME.replace(/(\s*)/g, "");
-            riverName = riverInfo[i].RIVER_NAME.replace(/(\s*)/g, "");
             curRiverGauge = riverInfo[i].CURRENT_LEVEL;
-            maxRiverGauge = riverInfo[i].LEVEE_LEVEL;
 
-            // 관측소 정보
-            observatoryInfoObject = {
-                riverName: convertRiverNameKorToEng(riverName),
-                riverGaugeName: convertGaugeNameKorToEng(riverGaugeName),
-                curRiverGauge: Number(curRiverGauge),
-                maxRiverGauge: Number(maxRiverGauge),
-                upStream: getUpstream(riverName)
-            };
+            // 기존 데이터와 통합
+            if(riverInfoObj.hasOwnProperty(riverGaugeName)){
 
-            observatoryInfoObject.level = getLevel(riverName);
-            observatoryArray.push(observatoryInfoObject);
+                // property 값을 기준으로 상수 데이터 검색
+                observatoryInfoObject = riverInfoObj[riverGaugeName];
+                observatoryInfoObject.curRiverGauge = Number(curRiverGauge);
+
+                // wizeye 서버로 전송할 object 배열을 만들기 위한 부분
+                observatoryArray.push(observatoryInfoObject);
+            } else {
+                // console.log(riverGaugeName + "에 해당하는 mock 데이터가 없습니다.");
+            }
         }
 
+        // wizeye 서버로 전송 요청
         requestData(observatoryArray);
-
     });
 };
 
-//1분 마다 데이터 가져옴
+//setInterval에 설정된 시간마다 데이터 가져와서 전송하도록 설정
 getRiverInfo(URL);
 setInterval(function() { getRiverInfo(URL); }, 60000);
