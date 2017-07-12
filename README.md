@@ -20,5 +20,5 @@ cutDataForChart.js - 차트에 표기될 legend 데이터만 표기하기 위해
 사진 및 문서 등등..<br>
 
 # 설치
-다운로드 이후에 npm install or request 모듈 설치
+다운로드 이후에 npm install or request 모듈 설치<br>
 node alfeios로 실행
