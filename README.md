@@ -1,7 +1,11 @@
 # alfeios parts
 Alfeios 프로젝트를 위한 데이터 전송 서버 및 wizeye ADP에 사용될 function 모듈
 
-# 설명
+## 설치
+다운로드 이후에 npm install or request 모듈 설치<br>
+node alfeios로 실행
+
+## 설명
 
 
 **./**
@@ -19,6 +23,4 @@ cutDataForChart.js - 차트에 표기될 legend 데이터만 표기하기 위해
 
 사진 및 문서 등등..<br>
 
-# 설치
-다운로드 이후에 npm install or request 모듈 설치<br>
-node alfeios로 실행
+
