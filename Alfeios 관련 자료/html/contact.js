@@ -1,1 +1,0 @@
-$('.middleBox').css('padding-top',($(window).height() - $('.middleBox').height())/2);
