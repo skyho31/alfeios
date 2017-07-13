@@ -1,6 +1,10 @@
-#common
 *.log
-node_module/
+/node_modules
 
-#Mac OS
+# misc
 .DS_Store
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
