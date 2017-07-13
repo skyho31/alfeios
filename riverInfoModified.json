@@ -3,14 +3,14 @@
         "riverName": "godeokcheon",
         "riverGaugeName": "godeokpump",
         "maxRiverGauge": 21.97,
-        "upStream": "hangang",
+        "upStream": "godeokcheon",
         "level": 2
     },
     "고척교": {
         "riverName": "anyangcheon",
         "riverGaugeName": "gocheokgyo",
         "maxRiverGauge": 15.44,
-        "upStream": "hangang",
+        "upStream": "anyangcheon",
         "level": 2
     },
     "광장(광진교)": {
@@ -30,21 +30,21 @@
         "riverName": "anyangcheon",
         "riverGaugeName": "giadaegyo",
         "maxRiverGauge": 18.35,
-        "upStream": "hangang",
+        "upStream": "anyangcheon",
         "level": 2
     },
     "노원교": {
         "riverName": "joonglangcheon",
         "riverGaugeName": "nowongyo",
         "maxRiverGauge": 30.92,
-        "upStream": "hangang",
+        "upStream": "joonglangcheon",
         "level": 2
     },
     "대곡교": {
         "riverName": "tancheon",
         "riverGaugeName": "daegokgyo",
         "maxRiverGauge": 20.09,
-        "upStream": "hangang",
+        "upStream": "tancheon",
         "level": 2
     },
     "도림교": {
@@ -79,7 +79,7 @@
         "riverName": "banpocheon",
         "riverGaugeName": "banpopump",
         "maxRiverGauge": 16.54,
-        "upStream": "hangang",
+        "upStream": "banpocheon",
         "level": 2
     },
     "모래말옆": {
@@ -89,11 +89,18 @@
         "upStream": "joonglangcheon",
         "level": 3
     },
+    "증산": {
+        "riverName": "bulgwangcheon",
+        "riverGaugeName": "jeoungsangyo",
+        "maxRiverGauge": 14.28,
+        "upStream": "hongjecheon",
+        "level": 3
+    },
     "봉은교": {
         "riverName": "tancheon",
         "riverGaugeName": "bongeungyo",
         "maxRiverGauge": 21.43,
-        "upStream": "hangang",
+        "upStream": "tancheon",
         "level": 2
     },
     "사당천": {
@@ -107,22 +114,22 @@
         "riverName": "seongnaecheon",
         "riverGaugeName": "mongchonpump",
         "maxRiverGauge": 22,
-        "upStream": "hangang",
+        "upStream": "seongnaecheon",
         "level": 2
     },
     "성동교": {
         "riverName": "joonglangcheon",
         "riverGaugeName": "seongdonggyo",
         "maxRiverGauge": 19.49,
-        "upStream": "hangang",
+        "upStream": "joonglangcheon",
         "level": 2
     },
     "성산2교": {
-        "riverName": "hongjecheon",
-        "riverGaugeName": "seongsan2gyo",
+        "riverName": "chunggyecheon",
+        "riverGaugeName": "majang2gyo",
         "maxRiverGauge": 18.34,
-        "upStream": "hangang",
-        "level": 2
+        "upStream": "joonglangcheon",
+        "level": 3
     },
     "신대방역": {
         "riverName": "dolimcheon",
@@ -142,14 +149,14 @@
         "riverName": "joonglangcheon",
         "riverGaugeName": "sinuigyo",
         "maxRiverGauge": 40.02,
-        "upStream": "hangang",
+        "upStream": "joonglangcheon",
         "level": 2
     },
     "안양하구": {
         "riverName": "anyangcheon",
         "riverGaugeName": "anyanghagu",
         "maxRiverGauge": 16.25,
-        "upStream": "hangang",
+        "upStream": "anyangcheon",
         "level": 2
     },
     "여수대교": {
@@ -160,7 +167,7 @@
         "level": 3
     },
     "영동2교": {
-        "riverName": "yangjaecheon",
+        "riveName": "yangjaecheon",
         "riverGaugeName": "yeongdong2gyo",
         "maxRiverGauge": 21.61,
         "upStream": "tancheon",
@@ -223,7 +230,7 @@
         "riverName": "tancheon",
         "riverGaugeName": "tancheon2gyo",
         "maxRiverGauge": 21.43,
-        "upStream": "hangang",
+        "upStream": "tancheon",
         "level": 2
     },
     "한강대교": {

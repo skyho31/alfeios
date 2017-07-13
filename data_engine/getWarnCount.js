@@ -43,7 +43,8 @@ for(i=0; i<len; i++){
     if(!temp_Obj.hasOwnProperty(riverInfo.upStream)){
         temp_Obj[riverInfo.upStream] = {
             "riverName" : riverInfo.upStream,
-            "warnCount" : 0
+            "warnCount" : 0,
+            "warnRiverName" : ""
         }
 
         if(riverInfo.floodRisk > 70) {
@@ -54,7 +55,7 @@ for(i=0; i<len; i++){
         temp_Obj[riverInfo.upStream].warnCount++;
 
         // 주의 - 범람된 강의 이름을 배열로 전달 시 각각을 metric으로 간주하여 새로운 범주를 생성함. string으로 처리할 것
-        temp_Obj[riverInfo.upStream].warnRiverName += (', ' + riverInfo.riverName);
+        temp_Obj[riverInfo.upStream].warnRiverName += (' ' + riverInfo.riverName);
     }
 }
 

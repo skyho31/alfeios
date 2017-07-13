@@ -25,6 +25,7 @@ var URL = 'http://openapi.seoul.go.kr:8088/' + API_KEY + '/json/ListRiverStageSe
 
 // 로컬 json(상수 데이터) 파일 불러오기
 var riverInfoObj = require('./riverInfo.json');
+//var riverInfoObj = require('./riverInfoModified.json');
 
 // Wizeye 서버로 request 하는 함수
 // getRiverInfo 함수 마지막에 넣음으로써 실행되게 배치
@@ -49,7 +50,7 @@ var requestData = function(data) {
         if (error) throw new Error(error);
 
         // 전송되는 데이터를 알고 싶을 때, 아래에 있는 console 주석 해제
-        // console.log(body);
+        console.log(body);
 
         // 데이터를 전송하는 타임라인을 알기 위한 콘솔
         var date = new Date();
@@ -84,7 +85,11 @@ var getRiverInfo = function(url) {
 
             // 관측소 이름 공백 제거
             riverGaugeName = riverInfo[i].RIVERGAUGE_NAME.replace(/(\s*)/g, "");
-            curRiverGauge = riverInfo[i].CURRENT_LEVEL;
+
+            // 랜덤 데이터 형성
+            curRiverGauge = Math.random() * (riverInfo[i].LEVEE_LEVEL);
+            //curRiverGauge = riverInfo[i].CURRENT_LEVEL;
+
 
             // 기존 데이터와 통합
             if(riverInfoObj.hasOwnProperty(riverGaugeName)){
