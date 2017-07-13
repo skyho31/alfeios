@@ -1,3 +1,6 @@
+#common
 *.log
 node_module/
-*.DS_Store
+
+#Mac OS
+.DS_Store
