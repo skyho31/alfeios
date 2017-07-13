@@ -37,7 +37,7 @@ for(i=0; i<len; i++){
 }
 
 
-// 전송하려는 객체 payload에 전달하려는 JSON 배열 선
+// 전송하려는 객체 payload에 전달하려는 JSON 배열 선언
 msg.payload = objArr;
 
 return msg;
