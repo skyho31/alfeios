@@ -112,4 +112,4 @@ var getRiverInfo = function(url) {
 
 //setInterval에 설정된 시간마다 데이터 가져와서 전송하도록 설정
 getRiverInfo(URL);
-setInterval(function() { getRiverInfo(URL); }, 60 * 1000);
+setInterval(function() { getRiverInfo(URL); }, 10 * 1000);
