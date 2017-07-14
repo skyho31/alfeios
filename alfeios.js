@@ -50,7 +50,7 @@ var requestData = function(data) {
         if (error) throw new Error(error);
 
         // 전송되는 데이터를 알고 싶을 때, 아래에 있는 console 주석 해제
-        console.log(body);
+        //console.log(body);
 
         // 데이터를 전송하는 타임라인을 알기 위한 콘솔
         var date = new Date();
