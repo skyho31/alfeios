@@ -18,6 +18,7 @@ riverInfo.json - API에서 추출한 상수 데이터를 JSON 파일로 만들�
 getFloodRisk.js - 범람 위험도 metric 형성 후 각 노드에 분배</br>
 getWarnCount.js - 하위 지류 범람 정보를 상위 지류로 전달<br>
 cutDataForChart.js - 차트에 표기될 legend 데이터만 표기하기 위해 metric 값 삭제<br><br>
+dataflow.json - DataEngine Flows 파일. DataEngine에서 import해서 currentFlow에 추가하면 됨<br><br>
 
 **./Alfeios 관련 자료**
 
