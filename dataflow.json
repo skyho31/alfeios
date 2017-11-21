@@ -1,0 +1,430 @@
+[
+    {
+        "id": "eb06f16.646021",
+        "type": "tab",
+        "label": "Realistic Flow"
+    },
+    {
+        "id": "64bf0ae3.938894",
+        "type": "data receiver",
+        "z": "eb06f16.646021",
+        "name": "observatory_receiver",
+        "port": "9070",
+        "path": "/alfeios",
+        "x": 143,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5757ee0d.d25c3",
+        "type": "object type",
+        "z": "eb06f16.646021",
+        "visible": true,
+        "active": false,
+        "ObjectType": "observatory",
+        "adp_connector": "c362cdb0.8e9",
+        "rule": "da8ea4f3.5adc98",
+        "ObjectId": "riverGaugeName",
+        "TimeField": "",
+        "TimeGroup": "",
+        "TimePeriod": "1",
+        "Interval": "",
+        "Query": "",
+        "Collector": "",
+        "DataReceiver": "",
+        "Storage": "",
+        "HealthColor": null,
+        "ColorRange": "[{\"Percent\":0,\"ColorHex\":\"#00ff00\"},{\"Percent\":100,\"ColorHex\":\"#ff0000\"}]",
+        "Metrics": {
+            "riverName": "",
+            "riverGaugeName": "",
+            "maxRiverGauge": "",
+            "upStream": "",
+            "level": "",
+            "curRiverGauge": "",
+            "floodRisk": "da8ea4f3.5adc98"
+        },
+        "Children": [],
+        "x": 983,
+        "y": 547,
+        "wires": [
+            [
+                "ead305b6.d68f98"
+            ]
+        ]
+    },
+    {
+        "id": "bad7db4a.3c6288",
+        "type": "object type",
+        "z": "eb06f16.646021",
+        "visible": true,
+        "active": false,
+        "ObjectType": "stream",
+        "adp_connector": "c362cdb0.8e9",
+        "rule": "da8ea4f3.5adc98",
+        "ObjectId": "hanriver_riverName",
+        "TimeField": "",
+        "TimeGroup": "",
+        "TimePeriod": "1",
+        "Interval": "",
+        "Query": "",
+        "Collector": "",
+        "DataReceiver": "",
+        "Storage": "",
+        "HealthColor": null,
+        "ColorRange": "[{\"Percent\":0,\"ColorHex\":\"#00ff00\"},{\"Percent\":100,\"ColorHex\":\"#ff0000\"}]",
+        "Metrics": {
+            "riverName": "",
+            "avgRisk": "",
+            "upStream": "",
+            "level": "",
+            "floodRisk": "da8ea4f3.5adc98",
+            "joonglangcheon.warnCount": "",
+            "joonglangcheon.riverName.0.anghakcheon": "",
+            "joonglangcheon.riverName.1.icheon": "",
+            "joonglangcheon.riverName.2.ungleungcheon": "",
+            "warnCount": "",
+            "warnRiverName.0.anghakcheon": "",
+            "warnRiverName.1.icheon": "",
+            "warnRiverName.2.ungleungcheon": "",
+            "warnRiverName": "",
+            "sumCurr": "",
+            "sumMax": ""
+        },
+        "Children": [
+            "628ecb1c.985154"
+        ],
+        "x": 1095,
+        "y": 322,
+        "wires": [
+            [
+                "6c9edaf9.408fa4"
+            ]
+        ]
+    },
+    {
+        "id": "d15346d8.7d1328",
+        "type": "object type",
+        "z": "eb06f16.646021",
+        "visible": true,
+        "active": false,
+        "ObjectType": "river",
+        "adp_connector": "c362cdb0.8e9",
+        "rule": "da8ea4f3.5adc98",
+        "ObjectId": "hanriver",
+        "TimeField": "",
+        "TimeGroup": "",
+        "TimePeriod": "1",
+        "Interval": "",
+        "Query": "",
+        "Collector": "",
+        "DataReceiver": "",
+        "Storage": "",
+        "HealthColor": null,
+        "ColorRange": "[{\"Percent\":0,\"ColorHex\":\"#00ff00\"},{\"Percent\":100,\"ColorHex\":\"#ff0000\"}]",
+        "Metrics": {
+            "riverName": "",
+            "avgRisk": "",
+            "level": "",
+            "floodRisk": "da8ea4f3.5adc98",
+            "upStream": "",
+            "sumCurr": "",
+            "sumMax": ""
+        },
+        "Children": [
+            "2199d8e9.163b68"
+        ],
+        "x": 1095,
+        "y": 102,
+        "wires": [
+            [
+                "98c8d1f9.9fbe5"
+            ]
+        ]
+    },
+    {
+        "id": "98c8d1f9.9fbe5",
+        "type": "preview",
+        "z": "eb06f16.646021",
+        "name": "river_preview",
+        "x": 1355,
+        "y": 102,
+        "wires": []
+    },
+    {
+        "id": "6c9edaf9.408fa4",
+        "type": "preview",
+        "z": "eb06f16.646021",
+        "name": "stream_preview",
+        "x": 1355,
+        "y": 322,
+        "wires": []
+    },
+    {
+        "id": "ead305b6.d68f98",
+        "type": "preview",
+        "z": "eb06f16.646021",
+        "name": "observatory_preview",
+        "x": 1359,
+        "y": 548,
+        "wires": []
+    },
+    {
+        "id": "242a6398.b7a33c",
+        "type": "function",
+        "z": "eb06f16.646021",
+        "name": "getWarnCount",
+        "func": "/**\n * N3N Web 파트 OJT\n *\n * - OJT 주제 : wizeye를 사용해서 적절한 플랫폼 구축하기\n * - 프로젝트 주제 : 서울시 하천 관제 시스템 만들기\n * - 기간 : 2017.6.22 ~ 2017.7.16\n * - 작성자 : 김선호 연구원\n *\n * Data Engine에 있는 getFloodRisk(function node) 3번째 결과값과 연결됩니다.\n * 데이터 흐름을 나타내기 위하여 최하위 지류(downstream) 앞단에 위치합니다.\n *\n * 최상위 맵에서 최하위의 지류의 범람 여부를 손쉽게 파악하기 위하여,\n * 앞단에 있는 getFloodRisk(function node)로부터 전달받은 하천 데이터의 범람 여부를 카운트하여,\n * 범람과 관련된 정보를 최상류와 연결되는 제1지류 오브젝트(stream - Object Type node)에 전달합니다.\n * 제2지류 오브젝트(downStream - Object Type node)에는 데이터를 수신 받은 그대로 전송해야함으로,\n * 전달받은 msg 객체를 손상시키지 않고 복제하여 사용 후, 2개의 아웃풋으로 분류하여 내보냅니다.\n *\n * 주의할 점 : receiver node로 부터 오는 데이터는 msg.payload에 JSON 배열의 형태로 수신되며,\n * 전송 시에도 object 안에 payload라는 이름의 property를 만들어주어 JSON 배열의 형태로 넘겨줘야 합니다.\n *\n */\n\n\n\n// temp_Obj : 범람 위험도와 범람된 하천, 전달할 상위 지류의 이름을 저장할 임시 객체\n// returnObj : payload 프로퍼티를 통하여 전송에 사용할 객체\n// returnArr : temp_Obj에 저장된 프로퍼티 값을 JSON 배열로 바꿔서 저장하기 위한 임시 배열\n// riverInfo : 각 하천에 대한 정보를 저장한 객체\nvar len = msg.payload.length,\n    temp_Obj = {}, returnObj = {},\n    returnArr = [],\n    riverInfo,\n    i;\n\n\n// 각 제2지류의 정보를 바탕으로 제1지류의 이름을 프로퍼티로 갖는 객체를 만들어 범람된 제2지류에 대한 정보를 저장하기 위한 반복문\nfor(i=0; i<len; i++){\n\n    riverInfo = msg.payload[i];\n\n    // 제1지류의 이름을 프로퍼티 값의 유무를 기준으로 해당 프로퍼티를 생성 및 변경\n    // 주의 - warnCount가 metric 값으로 전달되지 않을 시, 맵에서 바인딩된 램프가 검게 블링크 되는 현상 있음\n    if(!temp_Obj.hasOwnProperty(riverInfo.upStream)){\n        temp_Obj[riverInfo.upStream] = {\n            \"riverName\" : riverInfo.upStream,\n            \"warnCount\" : 0,\n            \"warnRiverName\" : \"\"\n        }\n\n        if(riverInfo.floodRisk > 70) {\n            temp_Obj[riverInfo.upStream].warnCount = 1;\n            temp_Obj[riverInfo.upStream].warnRiverName = riverInfo.riverName;\n        }\n    } else if (riverInfo.floodRisk > 70) {\n        temp_Obj[riverInfo.upStream].warnCount++;\n\n        // 주의 - 범람된 강의 이름을 배열로 전달 시 각각을 metric으로 간주하여 새로운 범주를 생성함. string으로 처리할 것\n        temp_Obj[riverInfo.upStream].warnRiverName += (' ' + riverInfo.riverName);\n    }\n}\n\n// 완성된 오브젝트를 메인 Key 값이 없는 JSON 배열화\nfor(var key in temp_Obj){\n    returnArr.push(temp_Obj[key]);\n}\n\n// 전송하려는 객체 payload에 전달하려는 JSON 배열 선언\nreturnObj.payload = returnArr;\n\n// output 개수에 맞게 출력 (2개)\nreturn [returnObj, msg];",
+        "outputs": "2",
+        "noerr": 0,
+        "x": 860,
+        "y": 380,
+        "wires": [
+            [
+                "bad7db4a.3c6288"
+            ],
+            [
+                "2a75c33f.6ca1fc"
+            ]
+        ]
+    },
+    {
+        "id": "2a75c33f.6ca1fc",
+        "type": "object type",
+        "z": "eb06f16.646021",
+        "visible": true,
+        "active": false,
+        "ObjectType": "downStream",
+        "adp_connector": "c362cdb0.8e9",
+        "rule": "da8ea4f3.5adc98",
+        "ObjectId": "hanriver_upStream_riverName",
+        "TimeField": "",
+        "TimeGroup": "",
+        "TimePeriod": "1",
+        "Interval": "",
+        "Query": "",
+        "Collector": "",
+        "DataReceiver": "",
+        "Storage": "",
+        "HealthColor": null,
+        "ColorRange": "[{\"Percent\":0,\"ColorHex\":\"#00ff00\"},{\"Percent\":100,\"ColorHex\":\"#ff0000\"}]",
+        "Metrics": {
+            "riverName": "",
+            "upStream": "",
+            "level": "",
+            "floodRisk": "da8ea4f3.5adc98",
+            "sumCurr": "",
+            "sumMax": ""
+        },
+        "Children": [],
+        "x": 1095,
+        "y": 442,
+        "wires": [
+            [
+                "a2d682b4.d5a12"
+            ]
+        ]
+    },
+    {
+        "id": "a2d682b4.d5a12",
+        "type": "preview",
+        "z": "eb06f16.646021",
+        "name": "downStream_preview",
+        "x": 1355,
+        "y": 442,
+        "wires": []
+    },
+    {
+        "id": "14693ede.f7ac51",
+        "type": "function",
+        "z": "eb06f16.646021",
+        "name": "getStreamFloodRisk",
+        "func": "/**\n * N3N Web 파트 OJT\n *\n * - OJT 주제 : wizeye를 사용해서 적절한 플랫폼 구축하기\n * - 프로젝트 주제 : 서울시 하천 관제 시스템 만들기\n * - 기간 : 2017.6.22 ~ 2017.7.16\n * - 작성자 : 김선호 연구원\n *\n * Data Engine에 있는 observatory_receiver(data receiver node) 바로 뒷단에 위치합니다.\n *\n * 앞단에 있는 data receiver node로부터 전달받은 관측소 데이터를 하천에 맞게 통합 시키고,\n * 최대 수위 대비 현재 수위 값을 통하여 범람 위험도를 나타내는 floodRisk라는 이름의 Metric을 만들어 각 하천 레벨에\n * 맞게 분배해주는 기능의 function node 입니다.\n *\n * 주의할 점 : receiver node로 부터 오는 데이터는 msg.payload에 JSON 배열의 형태로 수신되며,\n * 전송 시에도 object 안에 payload라는 이름의 property를 만들어주어 JSON 배열의 형태로 넘겨줘야 합니다.\n *\n */\n\n\n// length : 전송된 데이터의 길이, curr : 현재 수위, max : 최대 수위, level : 하천 레벨,\n// riverName : 관측소가 속한 하천의 이름, upStream : 하천의 상류 이름\nvar length = msg.payload.length,\n    curr, max, level, riverName, upStream,\n    i;\n\n// observatory_Obj : 하천 레벨로 분류하기 전에 각각의 하천에 floodRisk Metric을 만들어 주기 위한 임시 객체\n// lv[i]_obj, lv[i]_arr : 하천 레벨에 맞게 분류하여 객체를 형성하고, 전송될 배열의 폼으로 만들기 위한 변수\nvar observatory_Obj = {},\n    lv1_Obj = {}, lv2_Obj = {}, lv3_Obj = {},\n    lv1_arr = [], lv2_arr = [], lv3_arr = [];\n\n\n// 하천 평균 위험 수위를 구하기 위한 객체 형성을 위한 반복문\nfor(i=0; i<length; i++){\n\n    curr = msg.payload[i].curRiverGauge;\n    max = msg.payload[i].maxRiverGauge;\n    level = msg.payload[i].level;\n    riverName = msg.payload[i].riverName;\n    upStream = msg.payload[i].upStream;\n\n    // observatory_obj의 프로퍼티 값의 유무에 따라 하천 레벨에서 유의미한 값인 하천 이름, 상류의 이름, 하천 레벨,\n    // 현재 수위의 합(sumCurr)과 최대 수위의 합(sumMax)에 해당하는 프로퍼티를 만들거나 더해줍니다.\n    if(observatory_Obj.hasOwnProperty(riverName)){\n        observatory_Obj[riverName].sumCurr += curr;\n        observatory_Obj[riverName].sumMax += max;\n    } else {\n        observatory_Obj[riverName] = {\n            \"riverName\":riverName,\n            \"sumCurr\": curr,\n            \"sumMax\": max,\n            \"upStream\": upStream,\n            \"level\": level\n        };\n    }\n}\n\n\n// 하천의 레벨을 분류하고, 다음 node에 전송하기 위한 폼 형성을 위한 반복문\nfor(var riverName in observatory_Obj){\n\n    // 하천 레벨 분류를 위한 임시객체 형성 및 배열에 들어가는 참값 재설정을 위한 초기화 선언\n    var tempObj = observatory_Obj[riverName];\n\n    // 현재 수위의 합과 최대 수위의 합을 나누어 위험도 계산\n    tempObj.floodRisk = parseInt(tempObj.sumCurr/tempObj.sumMax * 100);\n\n    // 위험도 계산 이후 필요 없어진 프로퍼티값 삭제\n    delete tempObj.sumCurr;\n    delete tempObj.sumMax;\n\n    // 하천 레벨에 맞게 JSON 배열 형성\n    switch(tempObj.level){\n        case 1 :\n            lv1_arr.push(tempObj);\n            break;\n        case 2 :\n            lv2_arr.push(tempObj);\n            break;\n        case 3 :\n            lv3_arr.push(tempObj);\n            break;\n        default :\n            return false;\n    }\n}\n\n// 전송하려는 객체 payload에 해당하는 데이터를 매칭.\nlv1_Obj.payload = lv1_arr;\nlv2_Obj.payload = lv2_arr;\nlv3_Obj.payload = lv3_arr;\n\n\n// output 개수에 맞게 출력 (3개)\nreturn [lv1_Obj, lv2_Obj, lv3_Obj];",
+        "outputs": "3",
+        "noerr": 0,
+        "x": 673,
+        "y": 219,
+        "wires": [
+            [
+                "d15346d8.7d1328"
+            ],
+            [
+                "bad7db4a.3c6288",
+                "2c4f66cc.64b66a"
+            ],
+            [
+                "242a6398.b7a33c"
+            ]
+        ]
+    },
+    {
+        "id": "14cd6d28.82df93",
+        "type": "object type",
+        "z": "eb06f16.646021",
+        "visible": true,
+        "active": false,
+        "ObjectType": "streamChart",
+        "adp_connector": "c362cdb0.8e9",
+        "rule": "da8ea4f3.5adc98",
+        "ObjectId": "riverName",
+        "TimeField": "",
+        "TimeGroup": "",
+        "TimePeriod": "1",
+        "Interval": "",
+        "Query": "",
+        "Collector": "",
+        "DataReceiver": "",
+        "Storage": "",
+        "HealthColor": null,
+        "ColorRange": "[{\"Percent\":0,\"ColorHex\":\"#00ff00\"},{\"Percent\":100,\"ColorHex\":\"#ff0000\"}]",
+        "Metrics": {
+            "riverName": "",
+            "floodRisk": ""
+        },
+        "Children": [],
+        "x": 1095,
+        "y": 214,
+        "wires": [
+            [
+                "8cb08ef6.fb765"
+            ]
+        ]
+    },
+    {
+        "id": "2c4f66cc.64b66a",
+        "type": "function",
+        "z": "eb06f16.646021",
+        "name": "cutDataforChart",
+        "func": "var riverInfo = msg.payload,\n    len = riverInfo.length,\n    objArr = [], obj = {}, i;\n    \n\n\nfor(i=0; i<len; i++){\n    obj[\"riverName\"] = riverInfo[i].riverName;\n    obj[\"floodRisk\"] = riverInfo[i].floodRisk;\n    \n    objArr.push(obj);\n    obj = {};\n}\n\nmsg.payload = objArr;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 860,
+        "y": 220,
+        "wires": [
+            [
+                "14cd6d28.82df93"
+            ]
+        ]
+    },
+    {
+        "id": "8cb08ef6.fb765",
+        "type": "preview",
+        "z": "eb06f16.646021",
+        "name": "chart_preview",
+        "x": 1349,
+        "y": 216,
+        "wires": []
+    },
+    {
+        "id": "7417ddc3.e1c9d4",
+        "type": "function",
+        "z": "eb06f16.646021",
+        "name": "getObsFloodRisk",
+        "func": "var riverInfo = msg.payload,\n    len = riverInfo.length,\n    curr, max, floodRisk,\n    i;\n    \nfor(i=0; i<len; i++){\n    curr = riverInfo[i].curRiverGauge;\n    max = riverInfo[i].maxRiverGauge;\n    \n    riverInfo[i].floodRisk = curr/max * 100;\n}\n\nreturn msg;",
+        "outputs": "1",
+        "noerr": 0,
+        "x": 702,
+        "y": 548,
+        "wires": [
+            [
+                "5757ee0d.d25c3"
+            ]
+        ]
+    },
+    {
+        "id": "a1ce1b4a.dc6ad8",
+        "type": "http request",
+        "z": "eb06f16.646021",
+        "name": "requestRiverInfo",
+        "method": "GET",
+        "ret": "txt",
+        "url": "http://openapi.seoul.go.kr:8088/5954674b51736b793131394b43574959/json/ListRiverStageService/1/35/",
+        "tls": "",
+        "x": 265,
+        "y": 391,
+        "wires": [
+            [
+                "4a1c85bf.fe602c"
+            ]
+        ]
+    },
+    {
+        "id": "7ec2045.fdcd6fc",
+        "type": "inject",
+        "z": "eb06f16.646021",
+        "name": "setInterval",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "x": 118,
+        "y": 392,
+        "wires": [
+            [
+                "a1ce1b4a.dc6ad8",
+                "2dffd4e4.35594c"
+            ]
+        ]
+    },
+    {
+        "id": "4a1c85bf.fe602c",
+        "type": "json",
+        "z": "eb06f16.646021",
+        "name": "",
+        "x": 394,
+        "y": 390,
+        "wires": [
+            [
+                "4b4b690d.edcce8"
+            ]
+        ]
+    },
+    {
+        "id": "4b4b690d.edcce8",
+        "type": "function",
+        "z": "eb06f16.646021",
+        "name": "alfeios",
+        "func": "var data = msg.payload;\nvar convertGaugeNameKorToEng = function(gaugeName) {\n    switch (gaugeName) {\n        case '고덕펌프장':\n            return 'godeokpump';\n        case '초안교':\n            return 'choangyo';\n        case '묵동천':\n            return 'mukdongcheon';\n        case '삼천교':\n            return 'samcheongyo';\n        case '신림3교':\n            return 'sinlim3gyo';\n        case '사당천':\n            return 'sadangcheon';\n        case '영동2교':\n            return 'yeongdong2gyo';\n        case '반포펌프':\n            return 'banpopump';\n        case '고척교':\n            return 'gocheokgyo';\n        case '도림교':\n            return 'dolimgyo';\n        case '광화교':\n            return 'gwanghwagyo';\n        case '안양하구':\n            return 'anyanghagu';\n        case '용두교':\n            return 'yongdugyo';\n        case '모래말옆':\n            return 'moraemalyeob';\n        case '장월교옆':\n            return 'jangwolgyoyeob';\n        case '월계1교':\n            return 'wolgye1gyo';\n        case '성동교':\n            return 'seongdonggyo';\n        case '기아대교':\n            return 'giadaegyo';\n        case '대곡교':\n            return 'daegokgyo';\n        case '노원교':\n            return 'nowongyo';\n        case '계성교':\n            return 'gyeseonggyo';\n        case '신의교':\n            return 'sinuigyo';\n        case '마장2교':\n            return 'majang2gyo';\n        case '증산교':\n            return 'jeoungsangyo';\n        case '성산2교':\n            return 'sungsan2gyo';\n        case '신대방역':\n            return 'sindaebangyeok';\n        case '몽촌펌프':\n            return 'mongchonpump'\n        case '봉은교':\n            return 'bongeungyo';\n        case '탄천2교':\n            return 'tancheon2gyo';\n        case '천호대교':\n            return 'cheonhodaegyo';\n        case '여수대교':\n            return 'yeosudaegyo';\n        case '한강대교':\n            return 'hangangdaegyo'\n        case '잠수교':\n            return 'jamsugyo';\n        case '광장(광진교)':\n            return 'gwangjingyo';\n        case '청담대교':\n            return 'chungdamdaegyo';\n        default:\n            return gaugeName;\n    }\n}\n\nvar convertRiverNameKorToEng = function(riverName) {\n    switch (riverName) {\n        case '고덕천':\n            return 'godeokcheon';\n        case '당현천':\n            return 'danghyeoncheon';\n        case '묵동천':\n            return 'mukdongcheon';\n        case '진관천':\n            return 'jingwancheon';\n        case '도림천':\n            return 'dolimcheon';\n        case '사당천':\n            return 'sadangcheon';\n        case '양재천':\n            return 'yangjaecheon';\n        case '반포천':\n            return 'banpocheon';\n        case '안양천':\n            return 'anyangcheon';\n        case '목감천':\n            return 'mokgamcheon';\n        case '정릉천':\n            return 'jungleungcheon';\n        case '방학천':\n            return 'banghakcheon';\n        case '우이천':\n            return 'uicheon';\n        case '중랑천':\n            return 'joonglangcheon';\n        case '탄천':\n            return 'tancheon';\n        case '청계천':\n            return 'chunggyecheon';\n        case '불광천':\n            return 'bulgwangcheon';\n        case '홍제천':\n            return 'hongjecheon';\n        case '성내천':\n            return 'seongnaecheon';\n        case '한강':\n            return 'hangang';\n        default:\n            return riverName;\n    }\n}\n\nvar getLevel = function(riverName) {\n    switch (riverName) {\n        case \"한강\":\n            return 1;\n\n        case \"고덕천\":\n        case \"성내천\":\n        case \"탄천\":\n        case \"중랑천\":\n        case \"반포천\":\n        case \"봉원천\":\n        case \"홍제천\":\n        case \"안양천\":\n            return 2;\n\n        default:\n            return 3;\n    }\n}\n\nvar getUpstream = function(riverName){\n    switch (riverName) {\n        case \"한강\":\n            return null;\n\n        case \"고덕천\":\n        case \"성내천\":\n        case \"탄천\":\n        case \"중랑천\":\n        case \"반포천\":\n        case \"봉원천\":\n        case \"홍제천\":\n        case \"안양천\":\n            return \"hangang\";\n\n        case \"망월천\":\n            return \"godeokcheon\";\n\n        case \"세곡천\":\n        case \"양재천\":\n        case \"여의천\":\n            return \"tancheon\";\n\n        case \"도봉천\":\n        case \"방학천\":\n        case \"당현천\":\n        case \"묵동천\":\n        case \"우이천\":\n        case \"대동천\":\n        case \"가오천\":\n        case \"화계천\":\n        case \"면목천\":\n        case \"청계천\":\n        case \"성북천\":\n        case \"정릉천\":\n        case \"월곡천\":\n        case \"전농천\":\n            return \"joonglangcheon\";\n\n        case \"사당천\":\n            return \"banpocheon\";\n\n        case \"불광천\":\n        case \"녹번천\":\n            return \"hongjecheon\";\n\n        case \"시흥천\":\n        case \"목감천\":\n        case \"오류천\":\n        case \"도림천\":\n        case \"봉천천\":\n        case \"대방천\":\n            return \"anyangcheon\";\n\n        default:\n            return null;\n    }\n}\n\nvar riverInfo = data.ListRiverStageService.row,\n                riverCount = data.ListRiverStageService.list_total_count,\n                riverName, upStream,\n                observatoryInfoObject = null,\n                streamInfoObject = null,\n                riverInfoObject = null,\n                observatoryArray = [],\n                streamArray = [],\n                riverArray = [];\n\nfor (i = 0; i < riverCount; i++) {\n    riverGaugeName = riverInfo[i].RIVERGAUGE_NAME.replace(/(\\s*)/g, \"\");\n    riverName = riverInfo[i].RIVER_NAME.replace(/(\\s*)/g, \"\");\n    curRiverGauge = riverInfo[i].CURRENT_LEVEL;\n    maxRiverGauge = riverInfo[i].LEVEE_LEVEL;\n\n    // 관측소 정보\n    observatoryInfoObject = {\n        riverName: convertRiverNameKorToEng(riverName),\n        riverGaugeName: convertGaugeNameKorToEng(riverGaugeName),\n        curRiverGauge : Math.random() * (riverInfo[i].LEVEE_LEVEL),\n        //curRiverGauge: Number(curRiverGauge),\n        maxRiverGauge: Number(maxRiverGauge),\n        upStream: getUpstream(riverName)\n    };\n\n    observatoryInfoObject.level = getLevel(riverName);\n    observatoryArray.push(observatoryInfoObject);\n}\n     \nmsg.payload = observatoryArray;     \n    \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 515,
+        "y": 389,
+        "wires": [
+            [
+                "14693ede.f7ac51",
+                "7417ddc3.e1c9d4"
+            ]
+        ]
+    },
+    {
+        "id": "2dffd4e4.35594c",
+        "type": "debug",
+        "z": "eb06f16.646021",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 343,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "c362cdb0.8e9",
+        "type": "adp_connector",
+        "z": "",
+        "ip": "172.17.0.1",
+        "port": "1344",
+        "siteid": "d9b8264696b9310d2686d681e12a5499"
+    },
+    {
+        "id": "da8ea4f3.5adc98",
+        "type": "rule",
+        "z": "",
+        "Name": "waterRule",
+        "Conditions": "[{\"Value\":\"0\",\"Percent\":0},{\"Value\":\"70\",\"Percent\":100},{\"Value\":\"30\",\"Percent\":30}]"
+    }
+]

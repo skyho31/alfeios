@@ -7,7 +7,7 @@ var API_KEY = "5954674b51736b793131394b43574959";
 var URL = 'http://openapi.seoul.go.kr:8088/' + API_KEY + '/json/ListRiverStageService/1/35/';
 
 // Wizeye로 request
-var requestData = function(data) {
+var requestData = function (data) {
     var options = {
         method: 'POST',
         url: 'http://shkim.dev.wizeye.io:9070/alfeios',
@@ -19,13 +19,13 @@ var requestData = function(data) {
         json: true
     };
 
-    request(options, function(error, response, body) {
+    request(options, function (error, response, body) {
         if (error) throw new Error(error);
         console.log(body);
     });
 }
 
-var convertGaugeNameKorToEng = function(gaugeName) {
+var convertGaugeNameKorToEng = function (gaugeName) {
     switch (gaugeName) {
         case '고덕펌프장':
             return 'godeokpump';
@@ -102,7 +102,7 @@ var convertGaugeNameKorToEng = function(gaugeName) {
     }
 }
 
-var convertRiverNameKorToEng = function(riverName) {
+var convertRiverNameKorToEng = function (riverName) {
     switch (riverName) {
         case '고덕천':
             return 'godeokcheon';
@@ -149,7 +149,7 @@ var convertRiverNameKorToEng = function(riverName) {
     }
 }
 
-var getLevel = function(riverName) {
+var getLevel = function (riverName) {
     switch (riverName) {
         case "한강":
             return 1;
@@ -169,7 +169,7 @@ var getLevel = function(riverName) {
     }
 }
 
-var getUpstream = function(riverName){
+var getUpstream = function (riverName) {
     switch (riverName) {
         case "한강":
             return null;
@@ -228,23 +228,23 @@ var getUpstream = function(riverName){
     }
 }
 
-var getRiverInfo = function(url) {
+var getRiverInfo = function (url) {
 
-    request({ "url": url, "Content-type": "application/json" }, function(error, response, body) {
+    request({"url": url, "Content-type": "application/json"}, function (error, response, body) {
         if (error) throw new Error(error);
 
         data = JSON.parse(body);
 
 
-        var riverInfo = data.ListRiverStageService.row,
-            riverCount = data.ListRiverStageService.list_total_count,
-            riverName, upStream,
-            observatoryInfoObject = null,
-            streamInfoObject = null,
-            riverInfoObject = null,
-            observatoryArray = [],
-            streamArray = [],
-            riverArray = [];
+        var riverinfo = data.listriverstageservice.row,
+            rivercount = data.listriverstageservice.list_total_count,
+            rivername, upstream,
+            observatoryinfoobject = null,
+            streaminfoobject = null,
+            riverinfoobject = null,
+            observatoryarray = [],
+            streamarray = [],
+            riverarray = [];
 
         for (i = 0; i < riverCount; i++) {
             riverGaugeName = riverInfo[i].RIVERGAUGE_NAME.replace(/(\s*)/g, "");
@@ -272,4 +272,6 @@ var getRiverInfo = function(url) {
 
 //1분 마다 데이터 가져옴
 getRiverInfo(URL);
-setInterval(function() { getRiverInfo(URL); }, 60000);
+setInterval(function () {
+    getRiverInfo(URL);
+}, 60000);

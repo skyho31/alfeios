@@ -29,7 +29,7 @@ var riverInfoObj = require('./riverInfo.json');
 
 // Wizeye 서버로 request 하는 함수
 // getRiverInfo 함수 마지막에 넣음으로써 실행되게 배치
-var requestData = function(data) {
+var requestData = function (data) {
 
     // request 모듈을 사용하기 위한 설정.
     var options = {
@@ -46,7 +46,7 @@ var requestData = function(data) {
     // request 모듈을 통한 wizeye 서버로 데이터 전송
     // parameter로 options 값과 콜백함수를 받으며, 콜백함수의 error는 에러 시 메시지, response는 응답코드,
     // body는 전송된 값을 의미합니다.
-    request(options, function(error, response, body) {
+    request(options, function (error, response, body) {
         if (error) throw new Error(error);
 
         // 전송되는 데이터를 알고 싶을 때, 아래에 있는 console 주석 해제
@@ -60,10 +60,11 @@ var requestData = function(data) {
 
 // 실시간으로 변동되는 현재 수위 데이터를 기존 상수 데이터와 통합하기 위한 함수
 // api에서 데이터를 가져오기 위해 요청할 url을 매개변수로 받으며 request 모듈을 사용합니다.
-var getRiverInfo = function(url) {
+var getRiverInfo;
+getRiverInfo = function (url) {
 
     // API를 통한 하천 데이터 요청
-    request({ "url": url, "Content-type": "application/json" }, function(error, response, body) {
+    request({"url": url, "Content-type": "application/json"}, function (error, response, body) {
 
         if (error) throw new Error(error);
 
@@ -92,7 +93,12 @@ var getRiverInfo = function(url) {
 
 
             // 기존 데이터와 통합
-            if(riverInfoObj.hasOwnProperty(riverGaugeName)){
+            if (riverInfoObj.hasOwnProperty(riverGaugeName)) {
+
+
+
+
+
 
                 // property 값을 기준으로 상수 데이터 검색
                 observatoryInfoObject = riverInfoObj[riverGaugeName];
@@ -100,8 +106,6 @@ var getRiverInfo = function(url) {
 
                 // wizeye 서버로 전송할 object 배열을 만들기 위한 부분
                 observatoryArray.push(observatoryInfoObject);
-            } else {
-                // console.log(riverGaugeName + "에 해당하는 mock 데이터가 없습니다.");
             }
         }
 
@@ -112,4 +116,6 @@ var getRiverInfo = function(url) {
 
 //setInterval에 설정된 시간마다 데이터 가져와서 전송하도록 설정
 getRiverInfo(URL);
-setInterval(function() { getRiverInfo(URL); }, 10 * 1000);
+setInterval(function () {
+    getRiverInfo(URL);
+}, 10 * 1000);
